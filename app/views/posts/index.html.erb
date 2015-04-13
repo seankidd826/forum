@@ -1,7 +1,16 @@
-<% @posts.each do |post| %>
-  <div class="post_wrapper">
-    <h2 class="title"> <%= link_to post.title, post %></h2>
+<ul>
+  <% @posts.each do |post| %>
+    <li>
+      <%= link_to post.title, post %>
 
-    <p class="date"><%= post.created_at.strftime("%B %d, %Y") %></p>
-  </div>
-<% end %>
+      <span class="date"><%= post.created_at.strftime("%B %d, %Y") %></span>
+
+      <button type="button" class="btn btn-default"><%= link_to 'edit', edit_post_path(post) %></button>
+
+      <button type="button" class="btn btn-danger"><%= link_to 'delete', post_path(post), :method => :delete %></button>
+
+    </li>
+  <% end %>
+</ul>
+
+<%= paginate @posts %>
