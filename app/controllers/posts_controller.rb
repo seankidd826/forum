@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
 
+  before_action :authenticate_user!
   before_action :set_post, :only => [ :show, :edit, :update, :destroy]
 
   def index
@@ -25,10 +26,13 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @post = Post.find(params[:id])
   end
 
   def update
-    if @post.update(post_params)
+    @post = Post.find(params[:id])
+
+    if @post.update(params[:post].permit(:title, :body))
       flash[:notice] = "updated!"
       redirect_to @post
     else
@@ -37,9 +41,11 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    @post = Post.find(params[:id])
     @post.destroy
     flash[:alert] = "deleted!"
-    redirect_to :action => :index
+
+    redirect_to posts_path
   end
 
   private

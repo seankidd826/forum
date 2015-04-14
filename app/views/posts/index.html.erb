@@ -1,16 +1,20 @@
-<ul>
+<table class="table table-striped">
+  <tr>
   <% @posts.each do |post| %>
-    <li>
-      <%= link_to post.title, post %>
 
-      <span class="date"><%= post.created_at.strftime("%B %d, %Y") %></span>
+      <td>
+        <ul class="list-inline">
+          <li><h3><%= link_to post.title, post %></h3></li>
 
-      <button type="button" class="btn btn-default"><%= link_to 'edit', edit_post_path(post) %></button>
+          <li><span class="date"><%= post.created_at.strftime("%B %d, %Y") %></span></li>
 
-      <button type="button" class="btn btn-danger"><%= link_to 'delete', post_path(post), :method => :delete %></button>
+          <li><button type="button" class="btn btn-default"><%= link_to 'edit', edit_post_path(post) %></button></li>
 
-    </li>
+          <li><button type="button" class="btn btn-danger"><%= link_to 'delete', post_path(post), :method => :delete %></button></li>
+        </ul>
+      </td>
+  </tr>
   <% end %>
-</ul>
+</table>
 
 <%= paginate @posts %>

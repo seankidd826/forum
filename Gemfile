@@ -20,6 +20,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem "kaminari"
 
+gem "devise"
+
 gem "bootstrap-sass"
 
 gem "autoprefixer-rails"
